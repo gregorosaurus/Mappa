@@ -10,6 +10,8 @@ namespace Mappa
 
         public string OutputDirectory { get; private set; }
 
+        public OutputSaveMode OutputSaveMode = OutputSaveMode.Folders;
+
         public TileGenerator(string outputPath)
         {
             this.OutputDirectory = outputPath;
@@ -61,7 +63,22 @@ namespace Mappa
 
         protected string GenerateTileSavePath(int detailLevel, int tileX, int tileY)
         {
-            return Path.Combine(this.OutputDirectory, $"{TileSystem.TileXYToQuadKey(tileX, tileY, detailLevel)}.png");
+            if (OutputSaveMode == OutputSaveMode.QuadKey)
+            {
+                return Path.Combine(this.OutputDirectory, $"{TileSystem.TileXYToQuadKey(tileX, tileY, detailLevel)}.png");
+            }
+            else if (OutputSaveMode == OutputSaveMode.Folders)
+            {
+
+                var containingFolder = Path.Combine(this.OutputDirectory, detailLevel.ToString(), tileX.ToString());
+                if (!Directory.Exists(containingFolder))
+                    Directory.CreateDirectory(containingFolder);
+                return Path.Combine(containingFolder, tileY + ".png");
+            }
+            else
+            {
+                throw new NotSupportedException();
+            }
         }
 
 

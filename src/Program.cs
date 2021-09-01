@@ -40,8 +40,8 @@ namespace Mappa
                    {
                        Console.WriteLine("Running tiler process");
 
-                       GeoLocation upperRightBounds = GeoLocation.FromDegrees(o.North, o.West);
-                       GeoLocation lowerLeftBounds = GeoLocation.FromDegrees(o.South, o.East);
+                       GeoLocation upperRightBounds = GeoLocation.FromDegrees(o.North, o.East);
+                       GeoLocation lowerLeftBounds = GeoLocation.FromDegrees(o.South, o.West);
 
                        Image inputImage = LoadInputImage(o.ImagePath);
 
@@ -51,9 +51,10 @@ namespace Mappa
                             inputImage,
                             o.OutputPath);
 
-                        imageTileGenerator.MaxLevelOfDetail = o.Zoom;
+                       imageTileGenerator.MaxLevelOfDetail = o.Zoom;
+                       imageTileGenerator.OutputSaveMode = OutputSaveMode.Folders;
 
-                        imageTileGenerator.CreateTiles();
+                       imageTileGenerator.CreateTiles();
                    });
         }
 

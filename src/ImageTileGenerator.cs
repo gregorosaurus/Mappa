@@ -34,7 +34,7 @@ namespace Mappa
             TileSystem.LatLongToPixelXY(this._upperRightBounds.LatitudeDegrees, this._upperRightBounds.LongitudeDegrees, detailLevel, out imageUrX, out imageUrY);
             TileSystem.LatLongToPixelXY(this._lowerLeftBounds.LatitudeDegrees, this._lowerLeftBounds.LongitudeDegrees, detailLevel, out imageLlX, out imageLlY);
 
-            Rectangle imageRect = new Rectangle(imageLlX, imageUrY, (imageUrX - imageLlX), (imageLlY - imageUrY));
+            Rectangle imageRect = new Rectangle(imageLlX, imageUrY, Math.Max(1,(imageUrX - imageLlX)), Math.Max(1,(imageLlY - imageUrY)));
             lock (ImageRectanglesAtZoomLevels)
             {
                 ImageRectanglesAtZoomLevels.Add(detailLevel, imageRect);
