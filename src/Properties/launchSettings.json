@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Mappa": {
+      "commandName": "Project",
+      "commandLineArgs": "-d -o c:\\temp\\mappatest -z 8"
+    }
+  }
+}
